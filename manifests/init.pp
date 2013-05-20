@@ -1,4 +1,4 @@
-class redis( $up = hiera('redis::up', true) ) {
+class redis( $up = true ) {
 
     include yum::epel
 
@@ -14,6 +14,7 @@ class redis( $up = hiera('redis::up', true) ) {
         group   => 'root',
         mode    => '0644',
         source  => 'puppet:///modules/redis/redis.conf',
+        notify  => Service["redis"],
     }
 
     service { 'redis' :
